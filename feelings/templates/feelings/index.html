@@ -1,0 +1,110 @@
+{% extends "feelings/layout.html" %}
+
+{% block body %}
+<nav id="nav">
+    <ul>
+        <li><a href="#feelings">Feelings</a></li>
+        <li><a href="#quote">Quote</a></li>
+        <li><a href="#log">Log</a></li>
+        <li><a href="#breathing">Breathing</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+</nav>
+<h1 id="feelings">How are you feeling today?</h1>
+<form method="post" action="{%url 'index'%}">
+    {%csrf_token%}
+    <div class="main-feeling-container">
+        <div>
+            <div class="general-feelings">
+                {%for feeling in main%}      
+                    <input class="feeling main-feeling" type="checkbox" value="{{feeling.category}}" id="{{feeling.category}}" name="feelings">
+                    <label class="feeling-label {{feeling.category}}-checked" for="{{feeling.category}}">{{feeling.category}}</label>
+                {%endfor%}
+            </div>
+        </div>
+        <div class="feeling-description-container">
+            <h3 class="feeling-description-heading">{{message | linebreaks}}</h3>
+            <p class="feeling-description"></p>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button type="button" class="more button">Dig Deeper?</button>
+        <input type="date" id="date" name="date" class="button date">
+        <input type="submit" value="Log Feelings" name="addentry" class="button log">  
+    </div>
+    
+    <div class="more-feelings-container">
+        {%for feeling in feelings%}
+        <input class="feeling deeper" type="checkbox" value="{{feeling.feeling}}" id="{{feeling.feeling}}" name="feelings">
+        <label class="feeling-label deeper deeper-label {{feeling.category}}" value="{{feeling.feeling}}" for="{{feeling.feeling}}">{{feeling.feeling}}</label>
+        {%endfor%}
+    </div>
+
+</form>
+<div class="separator" id="quote"></div>
+
+<section class="quote-section" >
+    <h2>Motivational Quote</h2>
+    <p class="random-quote"></p>
+    <p class="random-quote-author"></p>
+    <button class="get-quote button">Get Quote</button>
+</section>
+
+
+<div class="separator" id="log"></div>
+
+<section class="log-section" >
+    <h2>Log</h2>
+
+    <table class="table-log">
+        <tr>
+            <th>Date</th>
+            <th>Feelings</th>
+        </tr>
+        {%regroup log|dictsortreversed:"date" by date as newlog%}
+        
+        {%for x in newlog%}
+        <tr>
+            <td>{{x.grouper}}</td>
+            <td class="feelings-log">
+                {%for y in x.list%}
+                    <span class="{{y.feeling.category}} feelings-log">{{y.feeling}}</span>
+                {%endfor%}
+                <form method="post" action="{%url 'index'%}" class="delete-form">
+                    {%csrf_token%}
+                    <input type="hidden" name="date" value="{{x.grouper|date:'Y-m-d'}}">
+                    <input type="submit" name="deleteentry" class="delete" value="X">
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+
+</section>
+
+<div class="separator" id="breathing"></div>
+
+<section class="breathing" >
+    <h2>Breathing Exercise</h2>
+    <div class="start-stop">
+        <button class="start-breathing button">Start</button>
+        <button class="stop-breathing button">Stop</button>
+    </div>
+    <div class="circle-container">
+        <div class="circle"></div>
+    </div>
+    <div class="arrows">
+    <p class="breathing-label">Slower</p><button class="button slower">&lt;</button>
+    <button class="button faster">&gt;</button><p class="breathing-label">Faster</p>
+</section>
+
+<div class="separator" id="about"></div>
+
+<section class="about" >
+    <h2>About</h2>
+    <p>This application is based on the work of Dr. Gloria Wilcox known as the 'Wheel of Feelings'.</p><p>It allows users to identify specific feelings, check their definition, and add them to a daily tracker.</p>
+    <p>Being able to identify feelings with more specificity helps to regulate emotions more effectively. It's also an important skill to increase emotional intelligence. </p>
+<section></section>
+
+{% endblock %}

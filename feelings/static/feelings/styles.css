@@ -1,0 +1,363 @@
+.circle{
+    background-color: white;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: 10px solid #5CC8F2;
+    
+}
+
+.circle-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.animation{
+    animation-name: breathing;
+    animation-duration: 16s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes breathing {
+    0%   {width: 100px; height: 100px;}
+    25% {width: 200px; height: 200px;}
+    50%  {width: 200px; height: 200px;}
+    75%  {width: 100px; height: 100px;}
+    100%  {width: 100px; height: 100px;}
+  }
+
+  .start-stop{
+    display:flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .start-breathing{
+    background-color: #BF3099;
+  }
+  
+  .stop-breathing{
+    background-color: #F2BE22;
+  }
+
+  .buttons{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+  }
+
+  .main-feeling-container{
+    display:flex;
+    gap: 80px;
+    justify-content: center;
+    flex-wrap:wrap;
+  }
+
+  .feeling-description-container{
+    width: 30%;
+    border:1px solid #ddd;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+
+  .feeling-description-container > element{
+    display: none;
+  }
+
+  .more-feelings-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto;
+  }
+
+  .Angry, input:checked + .Angry-checked{
+    background-color: #FFADAD;
+  }
+
+  .Angry + input:checked  + label{
+    background-color: #ff7171;
+  }
+
+  .Bad, input:checked + .Bad-checked{
+    background-color: #FFD6A5;
+  }
+
+  .Bad + input:checked  + label{
+    background-color: #ffa63c
+  }
+
+  .Sad, input:checked + .Sad-checked{
+    background-color: #9BF6FF;
+  }
+
+  .Sad + input:checked  + label{
+    background-color: #00b7c9
+  }
+
+  .Happy, input:checked + .Happy-checked{
+    background-color: #FDFFB6;
+  }
+
+  .Happy + input:checked  + label{
+    background-color: #d0d600
+  }
+
+  .Peaceful, input:checked + .Peaceful-checked{
+    background-color: #CAFFBF;
+  }
+
+  .Peaceful + input:checked  + label{
+    background-color: #21c000;
+  }
+
+  .Scared, input:checked + .Scared-checked{
+    background-color: #A0C4FF;
+  }
+
+  .Scared + input:checked  + label{
+    background-color:#004dcb;
+  }
+
+  .Surprised, input:checked + .Surprised-checked{
+    background-color: #BDB2FF;
+  }
+
+  .Surprised + input:checked  + label{
+    background-color: #6f57ff;
+  }
+
+  .general-feelings > input:checked + label{
+    color: #171321;
+  }
+
+  .general-feelings > label{
+    border: 1px solid white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid white;
+  }
+
+  .deeper{
+    display: none;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    width: 10%;
+    color: #171321;
+    border: 3px solid #171321;
+  }
+
+  .more-feelings-container > input:checked + label{
+    border: 3px solid white;
+  }
+
+
+  .general-feelings > label:hover{
+    cursor: pointer;
+  }
+
+  .more-feelings-container > label:hover{
+    cursor: pointer;
+  }
+
+  .general-feelings > input {
+    display: none;
+  }
+
+  .general-feelings{
+    display:flex;
+    flex-direction:column;
+  }
+
+  body{
+    background-color: #171321;
+    padding: 0;
+    margin: 0;
+    color: white;
+  }
+
+ .separator{
+  height: 5px;
+  background: linear-gradient(90deg, #F2BE22 0%, #5CC8F2 100%);
+  margin: 60px 0;
+ }
+
+ .feelings-log{
+  color: #171321;
+  padding: 10px;
+ }
+
+ h1{
+  font-family: "Oxygen mono", monospace;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 50px;
+  font-weight: normal;
+ }
+
+ h2{
+  font-family: "Oxygen mono", monospace;
+  font-size: 30px;
+  text-align: center;
+ }
+
+ .button{
+  padding: 10px;
+  width: 10%;
+  color: #171321;
+  border-radius: 10px;
+  border: 0px;
+  font-size: 18px;
+ }
+
+ .more.button{
+  background-color:#BF3099;
+ }
+
+ .log.button{
+  background-color: #F2BE22;
+ }
+
+ .date.button{
+  background-color:#5CC8F2;
+ }
+
+ .quote-section{
+  text-align: center;
+ }
+
+ .random-quote{
+  font-size: 20px;
+  font-family: sans-serif;
+ }
+
+ .random-quote-author{
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+ }
+
+ .get-quote{
+  background-color: #5CC8F2;
+ }
+
+ .delete{
+  background-color: #171321;
+  color: white;
+ }
+
+
+ .table-log{
+  font-family: sans-serif;
+  margin: 0 auto;
+  font-size: 20px;
+  width: 50%;
+ }
+
+ th{
+  border-bottom: 1px solid white;
+ }
+
+ tr{
+  height: 60px;
+ }
+
+ .delete-form{
+  display: inline;
+ }
+
+ .feelings-log{
+  display:flex;
+  flex-wrap:wrap;
+  align-items: center;
+ }
+
+ .arrows{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-content: center;
+ }
+
+ .faster, .slower{
+  background-color:#5CC8F2;
+  width: 5%;
+ }
+
+ .breathing-label{
+  font-size: 20px;
+  font-weight: bold;
+ }
+
+ ul{
+  display: flex;
+  list-style-type: none;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+ }
+
+ ul a{
+  font-family: "Oxygen mono";
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+ }
+
+ ul a:hover{
+  text-decoration: underline;
+  color: #BF3099;
+ }
+
+ nav{
+  background-color:#4b0d49;
+  position: fixed;
+  top: 0;
+  width: 100%;
+ }
+
+ .about{
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 60px;
+  font-size: 22px;
+  text-align: center;
+ }
+
+
+ @media (max-width: 600px){
+  .main-feeling-container{
+    width: 100%;
+  }
+  .feeling-description-container{
+    width: 100%;
+  }
+  li{
+    width: 20%
+  }
+  h1{
+    padding-top: 100px;
+  }
+  .general-feelings{
+    width: 250px;
+  }
+  .button{
+    width: 80%;
+  }
+  .table-log{
+    width:90%;
+  }
+}
+
+
+

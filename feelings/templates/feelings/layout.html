@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Feelings{% endblock %}</title>
+        <link href="{% static 'feelings/styles.css' %}" rel="stylesheet">
+        <script src="{% static 'feelings/script.js' %}"></script>  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
