@@ -20,10 +20,13 @@ def index(request):
 
         for item in feelings:
             feeling = Feeling.objects.get(feeling = item)
-            log = Log(user = user, feeling = feeling, date = date)
-            log.save()
-
-        message = 'Feelings logged with success'
+            try:
+                log = Log(user = user, feeling = feeling, date = date)
+                log.save()
+                message = 'Feelings logged with success'
+            except:
+                log = []
+                message = ''
     
     elif request.method == "POST" and 'deleteentry' in request.POST:
         user = request.user
@@ -36,6 +39,11 @@ def index(request):
     
     main = Feeling.objects.values('category').distinct().order_by('category')
     feelings = Feeling.objects.order_by('category','feeling').exclude(feeling__in=main)
-    log = Log.objects.filter(user = request.user)
+
+    try:
+        log = Log.objects.filter(user = request.user)
+    except:
+        log = []
+        message += '\n\n **IMPORTANT**: In order to use the log, please create an user account and log in before using the app'
 
     return render(request, "feelings/index.html", {"feelings": feelings, "main": main, "log":log, "message": message})
