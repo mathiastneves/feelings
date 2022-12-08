@@ -42,7 +42,12 @@ Before running the application, a fixture needs to be installed using
 python3 manage.py loaddata feelings/fixtures/emotions.json
 ```
 
-This will populate the database with the feeling words and categories. Then, with all files in place, it can be run using 
+This will populate the database with the feeling words and categories. 
+Then, a superuser account needs to be created via:
+```
+python3 manage.py createsuperuser
+```
+With all files in place, and after logging in, the app can be run using 
 
 ```
 python3 manage.py runserver  
