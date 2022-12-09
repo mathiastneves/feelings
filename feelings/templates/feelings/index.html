@@ -8,9 +8,16 @@
         <li><a href="#log">Log</a></li>
         <li><a href="#breathing">Breathing</a></li>
         <li><a href="#about">About</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logoutpage' %}">Logout</a></li>
+        {% endif %}
+
     </ul>
 </nav>
 <h1 id="feelings">How are you feeling today?</h1>
+
+{% if user.is_authenticated %}
+
 <form method="post" action="{%url 'index'%}">
     {%csrf_token%}
     <div class="main-feeling-container">
@@ -40,8 +47,17 @@
         <label class="feeling-label deeper deeper-label {{feeling.category}}" value="{{feeling.feeling}}" for="{{feeling.feeling}}">{{feeling.feeling}}</label>
         {%endfor%}
     </div>
-
 </form>
+
+{% else %}
+            <h3 class="welcome">Welcome! Login or create an account:</h3>
+            <form class="login-form" method="post" action="{%url 'loginpage'%}">
+                {% csrf_token %}
+                <input class="form-field" type="text" name="username" placeholder="Username">
+                <input class="form-field" type="password" name="password" placeholder="Password">
+                <input class="form-button" type="submit" name="login" value="Login or Register">
+            </form>            
+            {% endif %}
 <div class="separator" id="quote"></div>
 
 <section class="quote-section" >
@@ -50,7 +66,7 @@
     <p class="random-quote-author"></p>
     <button class="get-quote button">Get Quote</button>
 </section>
-
+{% if user.is_authenticated %}
 
 <div class="separator" id="log"></div>
 
@@ -83,6 +99,7 @@
 
 </section>
 
+{% endif %}
 <div class="separator" id="breathing"></div>
 
 <section class="breathing" >
