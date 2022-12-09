@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from .models import Feeling, Log
+from .models import Feeling, Log, User
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from django.db import IntegrityError
 import datetime
 
 # Create your views here.
@@ -44,6 +48,34 @@ def index(request):
         log = Log.objects.filter(user = request.user)
     except:
         log = []
-        message += '\n\n **IMPORTANT**: In order to use the log, please create an user account and log in before using the app'
 
     return render(request, "feelings/index.html", {"feelings": feelings, "main": main, "log":log, "message": message})
+
+
+def logoutpage(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("index"))
+
+def loginpage(request):
+    #Login users
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        print(username)
+        print(password)
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("index"))
+
+        else:
+            try:
+                user = User.objects.create_user(username, email=None, password=password)
+                user.save()
+                login(request, user)
+                return HttpResponseRedirect(reverse("index"))
+
+            except IntegrityError:
+                print("Failed")
+                return HttpResponseRedirect(reverse("index"))
